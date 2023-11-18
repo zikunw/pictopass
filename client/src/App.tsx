@@ -1,9 +1,12 @@
+import { useState } from "react"
+import { Button } from "./components/ui/button"
+
 function App() {
 
   return (
-    <>
-      <h1 className="text-red-600">App</h1>
-    </>
+    <div className="">
+      <Button>Click me</Button>
+    </div>
   )
 }
 
