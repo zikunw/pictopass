@@ -2,22 +2,22 @@ import { RedisClientType } from "redis";
 import { User } from "@prisma/client";
 
 export type RegisterBodyParams = {
-  username: string[];
-  passphrase: number[];
-  name: string;
+  username?: string[];
+  passphrase?: number[];
+  name?: string;
 };
 
 export type LoginBodyParams = {
-  username: string[];
-  passphrase: number[];
+  username?: string[];
+  passphrase?: number[];
 };
 
 export type SignoutBodyParams = {
-  jwt: string;
+  jwt?: string;
 };
 
 export type JWTBodyParams = {
-  jwt: string;
+  jwt?: string;
 };
 
 export type JWTData = {
