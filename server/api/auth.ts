@@ -53,9 +53,9 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const { username, passphrase, name }: RegisterBodyParams = req.body;
+  const { username, passphrase }: RegisterBodyParams = req.body;
 
-  if (!username || !passphrase || !name) {
+  if (!username || !passphrase) {
     return res.status(400).json({ error: "Invalid body properties" });
   }
 
@@ -74,7 +74,6 @@ router.post("/register", async (req, res) => {
     data: {
       username: usernameString,
       passHashSalt,
-      name,
     },
   });
 

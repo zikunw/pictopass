@@ -4,7 +4,6 @@ import { User } from "@prisma/client";
 export type RegisterBodyParams = {
   username?: string[];
   passphrase?: number[];
-  name?: string;
 };
 
 export type LoginBodyParams = {
