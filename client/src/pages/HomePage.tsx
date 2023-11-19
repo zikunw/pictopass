@@ -7,7 +7,7 @@ const Homepage = () => {
   const userJwt = window.sessionStorage.getItem("jwt");
 
   const getUserName = async (jwt: string) => {
-    const result = await fetch("https://api.pictopass.co:3000/users/fetch", {
+    const result = await fetch("https://api.pictopass.co/users/fetch", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

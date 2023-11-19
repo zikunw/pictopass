@@ -15,7 +15,7 @@ async function logout() {
     return;
   }
 
-  await fetch("https://api.pictopass.co:3000/auth/signout", {
+  await fetch("https://api.pictopass.co/auth/signout", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
