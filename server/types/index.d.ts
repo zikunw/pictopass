@@ -1,4 +1,5 @@
 import { RedisClientType } from "redis";
+import { User } from "@prisma/client";
 
 export type RegisterBodyParams = {
   username: string[];
@@ -24,3 +25,5 @@ export type JWTData = {
 };
 
 export type RedisClient = RedisClientType<any, any, any>;
+
+export type VisibleUser = Omit<User, "id" | "passHashSalt">;

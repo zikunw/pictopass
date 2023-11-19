@@ -7,7 +7,7 @@ export const createJWT = async (userId: string): Promise<string> => {
 
   const data: JWTData = { userId };
 
-  const token = sign(data, process.env.JWT_SECRET, {
+  const token = sign(data, process.env.JWT_SECRET!, {
     expiresIn: "1d",
   });
 
@@ -29,5 +29,5 @@ export const isJWTValid = async (jwt: string): Promise<string | JwtPayload | boo
   const userId = await redis.get(jwt);
   if (!userId) return false;
 
-  return verify(jwt, process.env.JWT_SECRET);
+  return verify(jwt, process.env.JWT_SECRET!);
 };
