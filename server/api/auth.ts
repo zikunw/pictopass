@@ -17,6 +17,10 @@ router.use(limiter);
 router.post("/login", async (req, res) => {
   const { username, passphrase }: LoginBodyParams = req.body;
 
+  if (!username || !passphrase) {
+    return res.status(400).json({ error: "Invalid body properties" });
+  }
+
   // Check if the username is an array of Shape
   const isUsernameAllShapes =
     username.every((shape: string) => SHAPES.includes(shape));
@@ -51,6 +55,10 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
   const { username, passphrase, name }: RegisterBodyParams = req.body;
 
+  if (!username || !passphrase || !name) {
+    return res.status(400).json({ error: "Invalid body properties" });
+  }
+
   // Check if the username is an array of Shape
   const isUsernameAllShapes =
     username.every((shape: string) => SHAPES.includes(shape));
@@ -83,6 +91,10 @@ router.post("/register", async (req, res) => {
 
 router.post("/signout", async (req, res) => {
   const { jwt }: SignoutBodyParams = req.body;
+
+  if (!jwt) {
+    return res.status(400).json({ error: "Invalid body properties" });
+  }
 
   if (!isJWTValid(jwt)) {
     return res.status(401).json({ message: "Invalid JWT" });

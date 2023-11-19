@@ -21,6 +21,10 @@ if (process.env.NODE_ENV === "development") {
 
 router.post("/fetch", async (req, res) => {
   const { jwt }: JWTBodyParams = req.body;
+  if (!jwt) {
+    return res.status(400).json({ error: "Invalid body properties" });
+  }
+
   const isValid = await isJWTValid(jwt);
 
   if (!isValid) {
