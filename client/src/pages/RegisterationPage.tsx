@@ -1,4 +1,3 @@
-import { SymbolLogout } from "@/components/Symbols"
 import { UserIDInput } from "@/components/UserID"
 import { LockClosedIcon } from "@radix-ui/react-icons"
 

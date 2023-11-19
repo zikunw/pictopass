@@ -1,5 +1,4 @@
 import { PersonIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
 import { 
     SymbolCircle, 
     SymbolHeart, 
@@ -82,7 +81,7 @@ const numberToSymbol = (n : number) => {
     }
 }
 
-const exampleUsername = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+//const exampleUsername = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
 
 type UserIDInputProps = {
     userID: number[];

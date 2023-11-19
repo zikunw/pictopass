@@ -3,10 +3,8 @@ import {
   RequireRead,
   AudioAssist,
 } from "@/components/accessibility";
-import { UserIDInput } from "@/components/UserID";
 import PatternLock from "@/components/PatternLock";
 import { useState } from "react";
-import { SymbolLogout, SymbolSignIn } from "@/components/Symbols";
 
 const TestPage = () => {
   const [pattern1, setPattern1] = useState<number[]>([]);
