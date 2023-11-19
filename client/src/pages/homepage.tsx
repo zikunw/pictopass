@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import logo from "../../public/logo.png";
 
 const Homepage = () => {
     const [username, setUsername] = useState<string>("")
@@ -33,8 +34,11 @@ const Homepage = () => {
 
     return (
         <div className="flex flex-col w-full h-full gap-5">
-            <h1 className="text-xl">Homepage</h1>
-            {userJwt && <h1 className="text-xl">Logged in, welcome {username}.</h1>}
+            <div className="flex flex-col w-full gap-5 my-20">
+                <img src={logo} className="w-1/2 h-1/2 mx-auto" />
+            </div>
+            {!userJwt && <h1 className="text-5xl text-center">Not logged in.</h1>}
+            {userJwt && <h1 className="text-5xl text-center">Logged in, welcome {username}.</h1>}
         </div>
     )
 }
