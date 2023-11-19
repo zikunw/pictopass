@@ -3,7 +3,7 @@ import {
   RequireRead,
   AudioAssist,
 } from "@/components/accessibility";
-import { UserIDInput, UserIDKeyboard } from "@/components/UserID";
+import { UserIDInput } from "@/components/UserID";
 import PatternLock from "@/components/PatternLock";
 
 const TestPage = () => {
@@ -25,13 +25,13 @@ const TestPage = () => {
           </RequireRead>
 
           <AudioAssist>
-            <h1 className="bg-white p-4 rounded-md">Audio Assist</h1>
+              <h1 className="bg-white p-4 rounded-md">Audio Assist</h1>
           </AudioAssist>
         </div>
 
         <h1>User ID section</h1>
         <UserIDInput />
-        <UserIDKeyboard />
+        
       </div>
       <PatternLock />
     </>
