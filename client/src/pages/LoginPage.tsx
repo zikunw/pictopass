@@ -63,7 +63,7 @@ const LoginPage = () => {
     return (
         <div className="flex flex-col w-full h-full gap-5">
         <div className="mt-10 mx-auto flex flex-row gap-4">
-            {SymbolSignIn()}
+            <div className="w-16 h-16">{SymbolSignIn()}</div>
             <h1 className="text-5xl font-bold">Login</h1>
         </div>
 
@@ -84,7 +84,7 @@ const LoginPage = () => {
         </div>
 
         <button className="mx-auto w-5/6 h-20 flex flex-row items-center p-2 border-2 border-black mb-20" onClick={() => postLogin(userID, combinedPattern)}>
-            <CheckCircledIcon className="w-16 h-16" />
+            <CheckCircledIcon className="mx-auto w-16 h-16" />
         </button>
     </div>
     )

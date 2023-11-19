@@ -38,11 +38,6 @@ export function NavBar({setPage}: {setPage: (page: number) => void}) {
                     <h1 className="p-2 font-bold">PictoPass</h1>
                 </NavigationMenuLink>
               </NavigationMenuItem>
-              <NavigationMenuItem>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()} onClick={() => setPage(3)}>
-                    Test
-                  </NavigationMenuLink>
-              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           <div className="flex-1" />
@@ -51,7 +46,7 @@ export function NavBar({setPage}: {setPage: (page: number) => void}) {
               <NavigationMenuItem>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()} onClick={() => setPage(2)}>
                     <LockClosedIcon className="w-8 h-8" />
-                    Registeration
+                    Registration
                   </NavigationMenuLink>
               </NavigationMenuItem>
 

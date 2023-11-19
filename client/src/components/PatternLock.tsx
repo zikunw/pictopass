@@ -32,7 +32,7 @@ const PatternLock: React.FC<PatternLockProps> = ({ onPatternChange }) => {
           disabled={disabled}
           onChange={handleChange}
           onFinish={() => setDisabled(true)}
-          style={{ margin: "0 auto" }}
+          style={{ margin: "0 auto"}}
         />
 
         <p className="text-white mt-2">Pattern output: {path.join(", ")}</p>
