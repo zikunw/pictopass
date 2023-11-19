@@ -73,7 +73,7 @@ const LoginPage = () => {
             </RequireWrite>
         </div>
 
-        <div className="mx-auto w-5/6">
+        <div className="flex justify-center">
             <RequireWrite hasWrite={combinedPattern.length > 10 }>
                 <div className="flex flex-row justify-center space-x-4 items-center">
                     <PatternLock onPatternChange={setPattern1} />
