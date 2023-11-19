@@ -84,7 +84,7 @@ const LoginPage = () => {
         </div>
 
         <button className="mx-auto w-5/6 h-20 flex flex-row items-center p-2 border-2 border-black mb-20" onClick={() => postLogin(userID, combinedPattern)}>
-            <CheckCircledIcon className="w-16 h-16" />
+            <CheckCircledIcon className="mx-auto w-16 h-16" />
         </button>
     </div>
     )
