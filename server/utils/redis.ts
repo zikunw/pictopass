@@ -1,8 +1,9 @@
-import { RedisClientType, createClient } from "redis";
+import { createClient } from "redis";
+import { RedisClient } from "../types";
 
-let redisClient: RedisClientType<any, any, any>;
+let redisClient: RedisClient;
 
-const createRedisClient = async () => {
+const createRedisClient = async (): Promise<void> => {
   redisClient = (await createClient({
     url: process.env.REDIS_URL,
     username: process.env.REDIS_USERNAME,
@@ -14,10 +15,10 @@ const createRedisClient = async () => {
     .on("connect", () => {
       console.log("Redis client connected");
     })
-    .connect()) as RedisClientType<any, any, any>;
+    .connect()) as RedisClient;
 };
 
-export const getRedisClient = async () => {
+export const getRedisClient = async (): Promise<RedisClient> => {
   if (!redisClient) {
     await createRedisClient();
   }

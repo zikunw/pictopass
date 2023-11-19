@@ -1,8 +1,8 @@
 import { JWTData } from "../types";
 import { getRedisClient } from "./redis";
-import { sign, verify } from "jsonwebtoken";
+import { JwtPayload, sign, verify } from "jsonwebtoken";
 
-export const createJWT = async (userId: string) => {
+export const createJWT = async (userId: string): Promise<string> => {
   const redis = await getRedisClient();
 
   const data: JWTData = { userId };
@@ -17,17 +17,13 @@ export const createJWT = async (userId: string) => {
   return token;
 };
 
-export const invalidateJWT = async (jwt: string) => {
+export const invalidateJWT = async (jwt: string): Promise<void> => {
   const redis = await getRedisClient();
 
   await redis.del(jwt);
 };
 
-export const invalidateAllUserJWTs = async (userId: string) => {
-    const redis = await getRedisClient();
-};
-
-export const isJWTValid = async (jwt: string) => {
+export const isJWTValid = async (jwt: string): Promise<string | JwtPayload | boolean> => {
   const redis = await getRedisClient();
 
   const userId = await redis.get(jwt);
