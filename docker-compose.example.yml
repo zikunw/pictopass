@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./client
+    container_name: pictopass-frontend
+    ports:
+      - "80:8080"
+    networks:
+      - pictopass
+    depends_on:
+      - backend
+  backend:
+    build: ./server
+    container_name: pictopass-backend
+    ports:
+      - "3000:3000"
+    networks:
+      - pictopass
+    healthcheck:
+      test: curl --silent --fail http://localhost:3000/healthz || exit 1
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    environment:
+      - DATABASE_URL=""
+      - SALT_ROUNDS="10"
+      - REDIS_USERNAME=""
+      - REDIS_PASSWORD=""
+      - REDIS_DB=""
+      - REDIS_URL=""
+      - JWT_SECRET=""
+      - ADMIN_KEY=""
+      - PORT="3000"
+      - NODE_ENV="production"
+      # - NODE_ENV="development"
+  
+networks:
+  pictopass:
+    driver: bridge

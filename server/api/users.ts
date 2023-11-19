@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 import { prisma } from "../utils/prisma";
 import { isJWTValid } from "../utils/jwt";
-import { JWTBodyParams, JWTData } from "../types";
+import { JWTBodyParams, JWTData, VisibleUser } from "../types";
 
 const router: Router = express.Router();
 
@@ -39,10 +39,14 @@ router.post("/fetch", async (req, res) => {
     return res.status(404).json({ error: "User not found" });
   }
 
+  // @ts-ignore - We'll typecast this later
   delete user.id;
+  // @ts-ignore - We'll typecast this later
   delete user.passHashSalt;
 
-  return res.status(200).json(user);
+  const visibleUser: VisibleUser = user as VisibleUser;
+
+  return res.status(200).json(visibleUser);
 });
 
 export default router;
