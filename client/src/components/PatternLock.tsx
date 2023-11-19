@@ -21,7 +21,7 @@ const PatternLock: React.FC<PatternLockProps> = ({ onPatternChange }) => {
   };
 
   return (
-    <Card className="max-w-sm mx-auto bg-gray-300 p-4">
+    <Card className="max-w-sm bg-gray-300 p-4">
       <div className="text-center mx-auto p-2">
         <ReactPatternLock
           path={path}

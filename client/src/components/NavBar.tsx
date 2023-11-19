@@ -7,6 +7,8 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { SymbolSignIn, SymbolLogout } from "./Symbols"
+import { LockClosedIcon } from "@radix-ui/react-icons"
 
 export function NavBar({setPage}: {setPage: (page: number) => void}) {
     return (
@@ -25,13 +27,33 @@ export function NavBar({setPage}: {setPage: (page: number) => void}) {
                   </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()} onClick={() => setPage(3)}>
+                    Test
+                  </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+          <div className="flex-1" />
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()} onClick={() => setPage(2)}>
+                    <LockClosedIcon className="w-8 h-8" />
                     Registeration
                   </NavigationMenuLink>
               </NavigationMenuItem>
+
               <NavigationMenuItem>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()} onClick={() => setPage(3)}>
-                    Test
+                    <div className="w-8 h-8"><SymbolSignIn /></div>
+                    LogIn
+                  </NavigationMenuLink>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()} onClick={() => setPage(3)}>
+                    <div className="w-8 h-8"><SymbolLogout /></div>
+                    Logout
                   </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>

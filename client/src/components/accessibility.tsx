@@ -9,14 +9,14 @@ const RequireWrite = ({ hasWrite, children }: RequireWriteProps) => {
     if (hasWrite) return (
         <div className="flex flex-row items-center gap-2 bg-green-400 p-4 rounded-md">
             {children}
-            <Pencil1Icon className="w-8 h-8"/>
+            <Pencil1Icon className="my-2 w-8 h-8"/>
         </div>
     )
 
     return (
         <div className="flex flex-row items-center gap-2 bg-orange-400 p-4 rounded-md">
             {children}
-            <Pencil1Icon className="w-8 h-8"/>
+            <Pencil1Icon className="my-2 w-8 h-8"/>
         </div>
     )
 }
@@ -28,7 +28,7 @@ const RequireRead = ({ children }: RequireReadProps) => {
     return (
         <div className="flex flex-row items-center gap-2 bg-purple-400 p-4 rounded-md">
             {children}
-            <FileTextIcon className="w-8 h-8"/>
+            <FileTextIcon className="my-2 w-8 h-8"/>
         </div>
     )
 }
@@ -40,7 +40,7 @@ const AudioAssist = ({ children }: AudioAssistProps) => {
     return (
         <div className="flex flex-row items-center gap-2 bg-teal-400 p-4 rounded-md">
             {children}
-            <SpeakerLoudIcon className="w-8 h-8"/>
+            <SpeakerLoudIcon className="my-2 w-8 h-8"/>
         </div>
     )
 }

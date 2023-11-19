@@ -6,6 +6,7 @@ import {
 import { UserIDInput } from "@/components/UserID";
 import PatternLock from "@/components/PatternLock";
 import { useState } from "react";
+import { SymbolLogout, SymbolSignIn } from "@/components/Symbols";
 
 const TestPage = () => {
   const [pattern1, setPattern1] = useState<number[]>([]);
@@ -37,7 +38,6 @@ const TestPage = () => {
         </div>
 
         <h1>User ID section</h1>
-        <UserIDInput />
 
         <div className="flex justify-center space-x-4">
           <PatternLock onPatternChange={setPattern1} />

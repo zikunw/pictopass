@@ -84,19 +84,23 @@ const numberToSymbol = (n : number) => {
 
 const exampleUsername = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
 
-const UserIDInput = () => {
-    const [userID, setUserID] = useState<number[]>([]);
+type UserIDInputProps = {
+    userID: number[];
+    setUserID: (userID: number[]) => void;
+};
+
+const UserIDInput = ({userID, setUserID}: UserIDInputProps) => {
 
     const checkAndSetUserID = (userID: number[]) => {
-        // if user id is longer than 15 characters, do not set
-        if (userID.length > 15) {
+        // if user id is longer than 13 characters, do not set
+        if (userID.length > 13) {
             return;
         }
         setUserID(userID);
     };
 
     return (
-        <div className="w-3/5 flex flex-col gap-2">
+        <div className="w-full flex flex-col gap-2">
             <div className="flex flex-row items-center">
                 <PersonIcon className="w-12 h-12 mx-8" />
                 <UserIDInputField value={userID} />
@@ -111,7 +115,7 @@ type UserIDInputFieldProps = {
 };
 const UserIDInputField = ({value}: UserIDInputFieldProps) => {
     return (
-        <div className="flex flex-row border-2 border-black w-full h-16 p-2 rounded">
+        <div className="flex flex-row bg-white border-2 border-black w-full h-16 p-2 rounded">
             {value.map((n, index) => {
                 const ThisSymbol = numberToSymbol(n);
                 return (
@@ -133,7 +137,7 @@ type UserIDKeyboardProps = {
 
 const UserIDKeyboard = ({userID, setUserID}: UserIDKeyboardProps) => {
     return (
-        <div className="border-2 border-black rounded-md p-4 grid grid-cols-6 grid-rows-3 justify-evenly">
+        <div className="bg-white border-2 border-black rounded-md p-4 grid grid-cols-6 grid-rows-3 justify-evenly">
 
             <div onClick={()=>setUserID([...userID, 0])}><SymbolButton symbol={SymbolSquare} /></div>
             <div onClick={()=>setUserID([...userID, 1])}><SymbolButton symbol={SymbolCircle} /></div>
@@ -142,7 +146,7 @@ const UserIDKeyboard = ({userID, setUserID}: UserIDKeyboardProps) => {
             <div onClick={()=>setUserID([...userID, 4])}><SymbolButton symbol={SymbolStar} /></div>
 
             <button
-                className="row-span-3 col-start-6 flex flex-row justify-self-center items-center ml-2 w-full  h-full hover:bg-gray-200 font-bold transition duration-100 ease-in-out border border-black rounded-md"
+                className="row-span-3 col-start-6 flex flex-row justify-self-center items-center ml-2 w-full  h-full hover:bg-gray-200 font-bold transition duration-100 ease-in-out border-2 border-black rounded-md"
                 onClick={() => setUserID(userID.slice(0, -1))}
             >
                 <FaDeleteLeft className="w-10 h-10 m-auto"/>
