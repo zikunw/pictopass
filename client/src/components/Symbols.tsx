@@ -5,12 +5,12 @@ const DiagnalHatch = () => {
         <defs>
             <pattern
                 id="hatchPattern"
-                width="8"
-                height="8"
+                width="4"
+                height="4"
                 patternUnits="userSpaceOnUse"
                 patternTransform="rotate(45)"
             >
-                <line x1="0" y1="0" x2="0" y2="8" stroke="black" strokeWidth="4" />
+                <line x1="0" y1="0" x2="0" y2="8" stroke="black" strokeWidth="3" />
             </pattern>
         </defs>
     )
@@ -20,7 +20,7 @@ const SymbolSquare = () => {
     return (
         <div className="w-10 h-10 rounded-md ">
             <svg viewBox="0 0 50 50">
-                <rect x="10" y="10" width="32" height="32"/>
+                <rect x="10" y="10" width="32" height="32" stroke="black" strokeWidth={STROKE_WIDTH}/>
             </svg>
         </div>
     );
@@ -51,7 +51,7 @@ const SymbolCircle = () => {
     return (
         <div className="w-10 h-10 rounded-md ">
             <svg viewBox="0 0 50 50">
-                <circle cx="25" cy="25" r="18"/>
+                <circle cx="25" cy="25" r="18" stroke="black" strokeWidth={STROKE_WIDTH}/>
             </svg>
         </div>
     );
@@ -82,8 +82,8 @@ const SymbolTriangle = () => {
     return (
         <div className="w-10 h-10 rounded-md ">
             <svg viewBox="0 0 50 50">
-                <g transform="scale(1.1)">
-                    <polygon points="25,10 10,40 40,40"/>
+                <g transform="scale(1)">
+                    <polygon points="25,10 10,40 40,40" stroke="black" strokeWidth={STROKE_WIDTH}/>
                 </g>
             </svg>
         </div>
@@ -116,9 +116,7 @@ const SymbolHeart = () => {
         <div className="w-10 h-10 rounded-md flex">
             <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="28px" height="28px" viewBox="0 0 29 28">
                 <g transform="translate(2, 2)">
-                    <g transform="scale(1.1)">
-                        <path d="M12 4.419c-2.826-5.695-11.999-4.064-11.999 3.27 0 7.27 9.903 10.938 11.999 15.311 2.096-4.373 12-8.041 12-15.311 0-7.327-9.17-8.972-12-3.27z"/>
-                    </g>
+                    <path d="M12 4.419c-2.826-5.695-11.999-4.064-11.999 3.27 0 7.27 9.903 10.938 11.999 15.311 2.096-4.373 12-8.041 12-15.311 0-7.327-9.17-8.972-12-3.27z" stroke="black" strokeWidth={STROKE_WIDTH-1}/>
                 </g>        
             </svg>
         </div>
@@ -130,7 +128,7 @@ const SymbolHeartOutline = () => {
         <div className="w-10 h-10 rounded-md flex">
             <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="28px" height="28px" viewBox="0 0 28 28">
                 <g transform="translate(2, 2)">
-                    <path id="heart" d="M12 4.419c-2.826-5.695-11.999-4.064-11.999 3.27 0 7.27 9.903 10.938 11.999 15.311 2.096-4.373 12-8.041 12-15.311 0-7.327-9.17-8.972-12-3.27z" fill="none"stroke="black" strokeWidth={STROKE_WIDTH-1}/>
+                    <path id="heart" d="M12 4.419c-2.826-5.695-11.999-4.064-11.999 3.27 0 7.27 9.903 10.938 11.999 15.311 2.096-4.373 12-8.041 12-15.311 0-7.327-9.17-8.972-12-3.27z" fill="none" stroke="black" strokeWidth={STROKE_WIDTH-1}/>
                 </g>
             </svg>
         </div>
@@ -140,9 +138,9 @@ const SymbolHeartOutline = () => {
 const SymbolHeartDiagnalHatch = () => {
     return (
         <div className="w-10 h-10 rounded-md">
-            <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="28px" height="28px" viewBox="0 0 28 28">
-                
-                <g transform="translate(2, 2)">
+            <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="28px" height="33px" viewBox="0 0 28 33">
+                <DiagnalHatch />
+                <g transform="translate(2, 7)">   
                     <path id="heart" d="M12 4.419c-2.826-5.695-11.999-4.064-11.999 3.27 0 7.27 9.903 10.938 11.999 15.311 2.096-4.373 12-8.041 12-15.311 0-7.327-9.17-8.972-12-3.27z" fill="url(#hatchPattern)"stroke="black" strokeWidth={STROKE_WIDTH-1}/>
                 </g>
             </svg>
@@ -152,19 +150,61 @@ const SymbolHeartDiagnalHatch = () => {
 
 const SymbolStar = () => {
     return (
-        <div className="w-10 h-10 rounded-md border-black">
-            <span className="h-full align-middle text-4xl">★</span>
+        <div className="w-10 h-10 rounded-md border-black flex items-center justify-center">
+            <svg id="svgelem" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                <g transform="scale(1.2,1)">
+                    <g transform = "translate(0, 2)">
+                        <polygon
+                            points="15,0 18,9 24,9 19,14.4 21,23.4 15,18 9,23.4 11,14.4 6,9 12,9"
+                            fill="black"
+                            stroke="black"
+                            strokeWidth="2"
+                        />
+                    </g>
+                </g>
+            </svg>
         </div>
     );
-}
+};
 
 const SymbolStarOutline = () => {
     return (
-        <div className="w-10 h-10 rounded-md border-black">
-            <span className="h-full align-middle text-4xl">☆</span>
+        <div className="w-10 h-10 rounded-md border-black flex items-center justify-center">
+            <svg id="svgelem" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                <g transform="scale(1.2,1)">
+                    <g transform = "translate(0, 2)">
+                        <polygon
+                            points="15,0 18,9 24,9 19,14.4 21,23.4 15,18 9,23.4 11,14.4 6,9 12,9"
+                            fill="none"
+                            stroke="black"
+                            strokeWidth="2"
+                        />
+                    </g>
+                </g>
+            </svg>
         </div>
     );
-}
+};
+
+const SymbolStarDiagnalHatch = () => {
+    return (
+        <div className="w-10 h-10 rounded-md border-black flex items-center justify-center">
+            <svg id="svgelem" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                <DiagnalHatch />
+                <g transform="scale(1.2,1)">
+                    <g transform = "translate(0, 2)">
+                        <polygon
+                            points="15,0 18,9 24,9 19,14.4 21,23.4 15,18 9,23.4 11,14.4 6,9 12,9"
+                            fill="url(#hatchPattern)"
+                            stroke="black"
+                            strokeWidth="2"
+                        />
+                    </g>
+                </g>
+            </svg>
+        </div>
+    );
+};
 
 export { 
     SymbolSquare, 
@@ -181,4 +221,5 @@ export {
     SymbolHeartDiagnalHatch,
     SymbolStar,
     SymbolStarOutline,
+    SymbolStarDiagnalHatch
 };

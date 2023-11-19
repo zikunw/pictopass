@@ -15,6 +15,7 @@ import {
     SymbolCircleDiagnalHatch,
     SymbolTriangleDiagnalHatch,
     SymbolHeartDiagnalHatch,
+    SymbolStarDiagnalHatch,
 } from "./Symbols";
 import { FaDeleteLeft } from "react-icons/fa6";
 
@@ -74,6 +75,8 @@ const numberToSymbol = (n : number) => {
             return SymbolTriangleDiagnalHatch;
         case Symbol.HeartDiagnalHatch:
             return SymbolHeartDiagnalHatch;
+        case Symbol.StarDiagnalHatch:
+            return SymbolStarDiagnalHatch;
         default:
             return SymbolCircle;
     }
@@ -93,13 +96,13 @@ const UserIDInput = () => {
     };
 
     return (
-        <>
-            <div className="flex flex-row items-center gap-5 w-3/5">
-                <PersonIcon className="w-8 h-8" />
+        <div className="w-3/5 flex flex-col gap-2">
+            <div className="flex flex-row items-center">
+                <PersonIcon className="w-12 h-12 mx-8" />
                 <UserIDInputField value={userID} />
             </div>
             <UserIDKeyboard userID={userID} setUserID={checkAndSetUserID}/>
-        </>
+        </div>
     );
 };
 
@@ -118,6 +121,7 @@ const UserIDInputField = ({value}: UserIDInputFieldProps) => {
                     </div>
                 );
             })}
+            <div className="ml-2 w-2 h-full bg-black animate-blink"/>
         </div>
     );
 }
@@ -129,12 +133,21 @@ type UserIDKeyboardProps = {
 
 const UserIDKeyboard = ({userID, setUserID}: UserIDKeyboardProps) => {
     return (
-        <div className="border-2 border-black rounded-md p-4 flex flex-row justify-evenly divide-x">
+        <div className="border-2 border-black rounded-md p-4 grid grid-cols-6 grid-rows-3 justify-evenly">
+
             <div onClick={()=>setUserID([...userID, 0])}><SymbolButton symbol={SymbolSquare} /></div>
             <div onClick={()=>setUserID([...userID, 1])}><SymbolButton symbol={SymbolCircle} /></div>
             <div onClick={()=>setUserID([...userID, 2])}><SymbolButton symbol={SymbolTriangle} /></div>
             <div onClick={()=>setUserID([...userID, 3])}><SymbolButton symbol={SymbolHeart} /></div>
             <div onClick={()=>setUserID([...userID, 4])}><SymbolButton symbol={SymbolStar} /></div>
+
+            <button
+                className="row-span-3 col-start-6 flex flex-row justify-self-center items-center ml-2 w-full  h-full hover:bg-gray-200 font-bold transition duration-100 ease-in-out border border-black rounded-md"
+                onClick={() => setUserID(userID.slice(0, -1))}
+            >
+                <FaDeleteLeft className="w-10 h-10 m-auto"/>
+            </button>
+
             <div onClick={()=>setUserID([...userID, 5])}><SymbolButton symbol={SymbolSquareOutline} /></div>
             <div onClick={()=>setUserID([...userID, 6])}><SymbolButton symbol={SymbolCircleOutline} /></div>
             <div onClick={()=>setUserID([...userID, 7])}><SymbolButton symbol={SymbolTriangleOutline} /></div>
@@ -144,12 +157,9 @@ const UserIDKeyboard = ({userID, setUserID}: UserIDKeyboardProps) => {
             <div onClick={()=>setUserID([...userID, 11])}><SymbolButton symbol={SymbolCircleDiagnalHatch} /></div>
             <div onClick={()=>setUserID([...userID, 12])}><SymbolButton symbol={SymbolTriangleDiagnalHatch} /></div>
             <div onClick={()=>setUserID([...userID, 13])}><SymbolButton symbol={SymbolHeartDiagnalHatch} /></div>
-            <button
-                className="hover:bg-gray-200 font-bold py-2 px-6 transition duration-100 ease-in-out"
-                onClick={() => setUserID(userID.slice(0, -1))}
-            >
-                <FaDeleteLeft className="w-6 h-6" />
-            </button>
+            <div onClick={()=>setUserID([...userID, 14])}><SymbolButton symbol={SymbolStarDiagnalHatch} /></div>
+            
+
         </div>
     );
 };
