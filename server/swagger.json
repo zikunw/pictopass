@@ -1,0 +1,432 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "PictoPass - API Docs",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication routes"
+    },
+    {
+      "name": "User",
+      "description": "User operation routes"
+    },
+    {
+      "name": "General",
+      "description": "Utility functions"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login to a user account",
+        "operationId": "loginUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBodyObject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Username was not formatted correctly",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid username or passphrase",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register a new user account",
+        "operationId": "registerUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterBodyObject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Username was not formatted correctly",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "User was unable to be created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Sign out of a user account, invalidating the JWT token",
+        "operationId": "signoutUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignoutBodyObject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful signout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignoutResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid JWT provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/fetch": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Fetch the details of a user account",
+        "operationId": "fetchUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersFetchBodyObject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User details sans sensitive fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid JWT provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthz": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Check if the API is alive",
+        "operationId": "checkAlive",
+        "responses": {
+          "200": {
+            "description": "User details sans sensitive fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginBodyObject": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Shape"
+            },
+            "example": [
+              "StripedSquare",
+              "Triangle",
+              "HollowCircle"
+            ]
+          },
+          "passphrase": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PassphraseCoordinate"
+            },
+            "example": [
+              1,
+              5,
+              9,
+              6,
+              3,
+              -1,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "jwt": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTU5NWQzOGNiNDRhOTA1NjRiNjg4ZTAiLCJpYXQiOjE3MDAzNTcxMTQsImV4cCI6MTcwMDQ0MzUxNH0.pOb-D00ayeON_9uaP2dRh4SUCBEhV_YaMiQCrmJHc4s"
+          }
+        }
+      },
+      "RegisterBodyObject": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Shape"
+            },
+            "example": [
+              "StripedSquare",
+              "Triangle",
+              "HollowCircle"
+            ]
+          },
+          "passphrase": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PassphraseCoordinate"
+            },
+            "example": [
+              1,
+              5,
+              9,
+              6,
+              3,
+              -1,
+              1,
+              2,
+              3
+            ]
+          },
+          "name": {
+            "type": "string",
+            "example": "Jane Smith"
+          }
+        }
+      },
+      "RegisterResponse": {
+        "type": "object",
+        "properties": {
+          "created": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "SignoutBodyObject": {
+        "type": "object",
+        "properties": {
+          "jwt": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTU5NWQzOGNiNDRhOTA1NjRiNjg4ZTAiLCJpYXQiOjE3MDAzNTcxMTQsImV4cCI6MTcwMDQ0MzUxNH0.pOb-D00ayeON_9uaP2dRh4SUCBEhV_YaMiQCrmJHc4s"
+          }
+        }
+      },
+      "SignoutResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "UsersFetchBodyObject": {
+        "type": "object",
+        "properties": {
+          "jwt": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTU5NWQzOGNiNDRhOTA1NjRiNjg4ZTAiLCJpYXQiOjE3MDAzNTcxMTQsImV4cCI6MTcwMDQ0MzUxNH0.pOb-D00ayeON_9uaP2dRh4SUCBEhV_YaMiQCrmJHc4s"
+          }
+        }
+      },
+      "UserData": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Jane Smith"
+          },
+          "username": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Shape"
+            },
+            "example": [
+              "StripedSquare",
+              "Triangle",
+              "HollowCircle"
+            ]
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Shape": {
+        "type": "string",
+        "enum": [
+          "Square",
+          "Triangle",
+          "Square",
+          "Circle",
+          "Star",
+          "Heart",
+          "StripedTriangle",
+          "StripedSquare",
+          "StripedCircle",
+          "StripedStar",
+          "StripedHeart",
+          "HollowTriangle",
+          "HollowSquare",
+          "HollowCircle",
+          "HollowStar",
+          "HollowHeart"
+        ]
+      },
+      "PassphraseCoordinate": {
+        "type": "integer",
+        "description": "Left-to-right, top-to-bottom index of cell used in password. \n\n -1 indicates the password ends and is followed by another password.",
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          -1
+        ]
+      }
+    }
+  }
+}
