@@ -63,7 +63,7 @@ const LoginPage = () => {
     return (
         <div className="flex flex-col w-full h-full gap-5">
         <div className="mt-10 mx-auto flex flex-row gap-4">
-            {SymbolSignIn()}
+            <div className="w-16 h-16">{SymbolSignIn()}</div>
             <h1 className="text-5xl font-bold">Login</h1>
         </div>
 
