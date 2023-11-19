@@ -1,10 +1,10 @@
-import express, { Router, Request, Response } from "express";
+import express, { Router } from "express";
 import {
   LoginBodyParams,
   RegisterBodyParams,
   SignoutBodyParams,
 } from "../types";
-import { Shape } from "@prisma/client";
+import { SHAPES } from "../utils/constants";
 import { compareHash, hashAndSalt } from "../utils/bcrypt";
 import { prisma } from "../utils/prisma";
 import { limiter } from "../utils/express";
@@ -18,20 +18,19 @@ router.post("/login", async (req, res) => {
   const { username, passphrase }: LoginBodyParams = req.body;
 
   // Check if the username is an array of Shape
-  const isUsernameAllShapes = username.every((entry) =>
-    (Object.values(Shape) as string[]).includes(entry)
-  );
+  const isUsernameAllShapes =
+    username.every((shape: string) => SHAPES.includes(shape));
+
   if (!isUsernameAllShapes) {
     return res.status(400).json({ error: "Invalid username" });
   }
 
-  // Convert the username array to Shape array
-  const usernameShapes = username.map((entry) => entry as Shape);
+  const usernameString = username.join("");
 
   const user = await prisma.user.findFirst({
     where: {
       username: {
-        equals: usernameShapes,
+        equals: usernameString,
       },
     },
   });
@@ -53,20 +52,19 @@ router.post("/register", async (req, res) => {
   const { username, passphrase, name }: RegisterBodyParams = req.body;
 
   // Check if the username is an array of Shape
-  const isUsernameAllShapes = username.every((entry) =>
-    (Object.values(Shape) as string[]).includes(entry)
-  );
+  const isUsernameAllShapes =
+    username.every((shape: string) => SHAPES.includes(shape));
   if (!isUsernameAllShapes) {
     return res.status(400).json({
       error: "Username must be an array of Shape",
     });
   }
 
-  const usernameShapes = username.map((entry) => entry as Shape);
+  const usernameString = username.join("");
   const passHashSalt = await hashAndSalt(passphrase.join(""));
   const newUser = await prisma.user.create({
     data: {
-      username: usernameShapes,
+      username: usernameString,
       passHashSalt,
       name,
     },
