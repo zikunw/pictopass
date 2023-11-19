@@ -51,7 +51,7 @@ export function NavBar({setPage}: {setPage: (page: number) => void}) {
               <NavigationMenuItem>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()} onClick={() => setPage(2)}>
                     <LockClosedIcon className="w-8 h-8" />
-                    Registeration
+                    Registration
                   </NavigationMenuLink>
               </NavigationMenuItem>
 

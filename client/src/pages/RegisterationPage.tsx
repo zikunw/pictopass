@@ -59,7 +59,7 @@ const RegisterationPage = () => {
         <div className="flex flex-col w-full h-full gap-5">
             <div className="mt-10 mx-auto flex flex-row gap-4">
                 <LockClosedIcon className="w-16 h-16" />
-                <h1 className="text-5xl font-bold">Registeration</h1>
+                <h1 className="text-5xl font-bold">Registration</h1>
             </div>
 
             <div className="mx-auto w-5/6">
