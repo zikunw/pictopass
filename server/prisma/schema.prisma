@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Shape {
+  Triangle
+  Square
+  Circle
+  Star
+  Heart
+  StripedTriangle
+  StripedSquare
+  StripedCircle
+  StripedStar
+  StripedHeart
+  HollowTriangle
+  HollowSquare
+  HollowCircle
+  HollowStar
+  HollowHeart
+}
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  username Shape[] @unique
+  // Series of indicies corresponding to the cells used in the
+  // passphrase. There is a line between each cell in the passphrase
+  // and the next cell in the passphrase.
+  // If there are more than one passphrase, seperate them with a -1.
+  // Hash and salt are used to verify the passphrase.
+  passHashSalt String
+}
