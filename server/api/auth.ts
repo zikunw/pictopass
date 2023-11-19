@@ -70,12 +70,20 @@ router.post("/register", async (req, res) => {
 
   const usernameString = username.join("");
   const passHashSalt = await hashAndSalt(passphrase.join(""));
-  const newUser = await prisma.user.create({
-    data: {
-      username: usernameString,
-      passHashSalt,
-    },
-  });
+
+  let newUser;
+  try {
+    newUser = await prisma.user.create({
+      data: {
+        username: usernameString,
+        passHashSalt,
+      },
+    });
+  } catch (e) {
+    return res.status(400).json({
+      error: "Username already exists",
+    });
+  }
 
   if (!newUser) {
     return res.status(500).json({
