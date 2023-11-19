@@ -37,7 +37,7 @@ const RegisterationPage = () => {
     passphrase: number[]
   ): Promise<boolean> {
     const userIDInShapes = userID.map((n) => shapes[n]);
-    const result = await fetch("http://api.pictopass.co:3000/auth/register", {
+    const result = await fetch("https://api.pictopass.co:3000/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
