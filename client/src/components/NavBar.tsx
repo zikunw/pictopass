@@ -25,6 +25,7 @@ async function logout() {
     }),
   });
   window.sessionStorage.removeItem("jwt");
+  window.location.reload();
 }
 
 export function NavBar({ setPage }: { setPage: (page: number) => void }) {

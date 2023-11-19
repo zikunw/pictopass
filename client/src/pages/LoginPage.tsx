@@ -26,7 +26,7 @@ const shapes = [
 type LoginPageProps = {
   setPage: (page: number) => void;
 };
-const LoginPage = ({setPage}: LoginPageProps) => {
+const LoginPage = ({ setPage }: LoginPageProps) => {
   const [userID, setUserID] = useState<number[]>([]);
   const [pattern1, setPattern1] = useState<number[]>([]);
   const [pattern2, setPattern2] = useState<number[]>([]);
@@ -59,8 +59,8 @@ const LoginPage = ({setPage}: LoginPageProps) => {
       console.log(jwt);
 
       window.sessionStorage.setItem("jwt", jwt);
-
       setPage(0);
+      window.location.reload();
       return true;
     }
     return false;
