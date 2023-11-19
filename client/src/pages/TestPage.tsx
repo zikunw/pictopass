@@ -1,5 +1,5 @@
 import { RequireWrite, RequireRead, AudioAssist } from "@/components/accessibility"
-import { UserIDInput, UserIDKeyboard } from "@/components/UserID"
+import { UserIDInput } from "@/components/UserID"
 
 const TestPage = () => {
     return (
@@ -26,7 +26,6 @@ const TestPage = () => {
 
             <h1>User ID section</h1>
             <UserIDInput />
-            <UserIDKeyboard />
         </div>
     )
 }
