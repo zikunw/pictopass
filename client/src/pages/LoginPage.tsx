@@ -23,7 +23,10 @@ const shapes = [
   "HollowStar",
 ];
 
-const LoginPage = () => {
+type LoginPageProps = {
+  setPage: (page: number) => void;
+};
+const LoginPage = ({setPage}: LoginPageProps) => {
   const [userID, setUserID] = useState<number[]>([]);
   const [pattern1, setPattern1] = useState<number[]>([]);
   const [pattern2, setPattern2] = useState<number[]>([]);
@@ -57,6 +60,7 @@ const LoginPage = () => {
 
       window.sessionStorage.setItem("jwt", jwt);
 
+      setPage(0);
       return true;
     }
     return false;
