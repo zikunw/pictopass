@@ -1,0 +1,17 @@
+export const SHAPES = [
+  "Triangle",
+  "Square",
+  "Circle",
+  "Star",
+  "Heart",
+  "StripedTriangle",
+  "StripedSquare",
+  "StripedCircle",
+  "StripedStar",
+  "StripedHeart",
+  "HollowTriangle",
+  "HollowSquare",
+  "HollowCircle",
+  "HollowStar",
+  "HollowHeart",
+];
