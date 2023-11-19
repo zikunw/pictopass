@@ -2,6 +2,7 @@ import express from "express";
 import compression from "compression";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
+import cors from "cors";
 
 import { checkEnv } from "./utils/env";
 
@@ -12,6 +13,7 @@ import auth from "./api/auth";
 checkEnv();
 
 const app = express();
+app.use(cors());
 app.use(compression());
 app.use(express.json());
 
