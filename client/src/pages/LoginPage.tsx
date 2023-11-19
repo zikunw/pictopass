@@ -1,93 +1,98 @@
-import { SymbolSignIn } from "@/components/Symbols"
-import { useState } from "react"
-import { RequireWrite } from "@/components/accessibility"
-import { UserIDInput } from "@/components/UserID"
-import PatternLock from "@/components/PatternLock"
-import { CheckCircledIcon } from "@radix-ui/react-icons"
+import { SymbolSignIn } from "@/components/Symbols";
+import { useState } from "react";
+import { RequireWrite } from "@/components/accessibility";
+import { UserIDInput } from "@/components/UserID";
+import PatternLock from "@/components/PatternLock";
+import { CheckCircledIcon } from "@radix-ui/react-icons";
 
-const shapes = [ 
-    "Square",
-    "Circle",
-    "Triangle",
-    "Heart",
-    "Star",
-    "StripedSquare",
-    "StripedCircle",
-    "StripedTriangle",
-    "StripedHeart",
-    "StripedStar",
-    "HollowSquare",
-    "HollowCircle",
-    "HollowTriangle",
-    "HollowHeart",
-    "HollowStar",
+const shapes = [
+  "Square",
+  "Circle",
+  "Triangle",
+  "Heart",
+  "Star",
+  "StripedSquare",
+  "StripedCircle",
+  "StripedTriangle",
+  "StripedHeart",
+  "StripedStar",
+  "HollowSquare",
+  "HollowCircle",
+  "HollowTriangle",
+  "HollowHeart",
+  "HollowStar",
 ];
 
 const LoginPage = () => {
-    const [userID, setUserID] = useState<number[]>([])
-    const [pattern1, setPattern1] = useState<number[]>([]);
-    const [pattern2, setPattern2] = useState<number[]>([]);
-    const [pattern3, setPattern3] = useState<number[]>([]);
-    const combinedPattern = pattern1.concat(pattern2, pattern3);
+  const [userID, setUserID] = useState<number[]>([]);
+  const [pattern1, setPattern1] = useState<number[]>([]);
+  const [pattern2, setPattern2] = useState<number[]>([]);
+  const [pattern3, setPattern3] = useState<number[]>([]);
+  const combinedPattern = pattern1.concat(pattern2, pattern3);
 
-    async function postLogin(userID: number[], passphrase: number[]): Promise<boolean> {
-        
-        const userIDInShapes = userID.map((n) => shapes[n]);
-        const result = await fetch("http://localhost:3000/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: userIDInShapes,
-                passphrase: passphrase,
-            }),
-        })
-    
-        if (result.status === 200) {
-            console.log("Logged in")
+  async function postLogin(
+    userID: number[],
+    passphrase: number[]
+  ): Promise<boolean> {
+    const userIDInShapes = userID.map((n) => shapes[n]);
+    const result = await fetch("http://backend:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: userIDInShapes,
+        passphrase: passphrase,
+      }),
+    });
 
-            // get token
-            const resJSON = await result.json()
-            const jwt = resJSON.jwt;
+    if (result.status === 200) {
+      console.log("Logged in");
 
-            console.log(jwt)
+      // get token
+      const resJSON = await result.json();
+      const jwt = resJSON.jwt;
 
-            window.sessionStorage.setItem("jwt", jwt);
+      console.log(jwt);
 
-            return true
-        }
-        return false
+      window.sessionStorage.setItem("jwt", jwt);
+
+      return true;
     }
+    return false;
+  }
 
-    return (
-        <div className="flex flex-col w-full h-full gap-5">
-        <div className="mt-10 mx-auto flex flex-row gap-4">
-            <div className="w-16 h-16">{SymbolSignIn()}</div>
-            <h1 className="text-5xl font-bold">Login</h1>
-        </div>
+  return (
+    <div className="flex flex-col w-full h-full gap-5">
+      <div className="mt-10 mx-auto flex flex-row gap-4">
+        <div className="w-16 h-16">{SymbolSignIn()}</div>
+        <h1 className="text-5xl font-bold">Login</h1>
+      </div>
 
-        <div className="mx-auto w-5/6">
-            <RequireWrite hasWrite={userID.length >= 3}>
-                <UserIDInput userID={userID} setUserID={setUserID}/>
-            </RequireWrite>
-        </div>
+      <div className="mx-auto w-5/6">
+        <RequireWrite hasWrite={userID.length >= 3}>
+          <UserIDInput userID={userID} setUserID={setUserID} />
+        </RequireWrite>
+      </div>
 
-        <div className="flex justify-center">
-            <RequireWrite hasWrite={combinedPattern.length > 10 }>
-                <div className="flex flex-row justify-center space-x-4 items-center">
-                    <PatternLock onPatternChange={setPattern1} />
-                    <PatternLock onPatternChange={setPattern2} />
-                    <PatternLock onPatternChange={setPattern3} />
-                </div>
-            </RequireWrite>
-        </div>
+      <div className="flex justify-center">
+        <RequireWrite hasWrite={combinedPattern.length > 10}>
+          <div className="flex flex-row justify-center space-x-4 items-center">
+            <PatternLock onPatternChange={setPattern1} />
+            <PatternLock onPatternChange={setPattern2} />
+            <PatternLock onPatternChange={setPattern3} />
+          </div>
+        </RequireWrite>
+      </div>
 
-        <button className="mx-auto w-5/6 h-20 flex flex-row items-center p-2 border-2 border-black mb-20" onClick={() => postLogin(userID, combinedPattern)}>
-            <CheckCircledIcon className="mx-auto w-16 h-16" />
-        </button>
+      <button
+        className="mx-auto w-5/6 h-20 flex flex-row items-center p-2 border-2 border-black mb-20"
+        onClick={() => postLogin(userID, combinedPattern)}
+      >
+        <CheckCircledIcon className="mx-auto w-16 h-16" />
+      </button>
     </div>
-    )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
